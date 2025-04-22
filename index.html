@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/stenwire/portfolio_website@main/sten_logo.png" type="image/png">
+    <title>Stephen Nwankwo - Software Engineer</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #e6edf3;
+            --accent-color: #58a6ff;
+            --secondary-color: #30363d;
+            --tertiary-color: #21262d;
+            --success-color: #3fb950;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 3rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        .intro {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .intro-text h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .intro-text h1 span {
+            color: var(--accent-color);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .terminal {
+            background-color: var(--tertiary-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            overflow: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .prompt {
+            color: var(--accent-color);
+        }
+        
+        .command {
+            color: #7ee787;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            background-color: var(--tertiary-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            border: 1px solid var(--secondary-color);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        
+        .project-card a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        
+        .project-card a:hover {
+            color: var(--text-color);
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background-color: var(--secondary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .skill-tag {
+            background-color: var(--secondary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--secondary-color);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+        
+        /* Cursor animation */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: var(--accent-color);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Experience timeline styles */
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 0;
+            margin-left: 20px;
+        }
+        
+        .timeline-item {
+            padding: 0 30px 20px 60px;
+            position: relative;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            top: 0;
+            border-radius: 50%;
+            left: 13px;
+            z-index: 1;
+        }
+        
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .timeline-position {
+            font-size: 1.1rem;
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-company {
+            color: #8b949e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-description {
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">sten@portfolio:~$</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="intro" id="about">
+            <div class="intro-text">
+                <h1>Hello, I'm <span>Stephen Nwankwo</span></h1>
+                <p class="subtitle">Product Engineer - PartTime & Problem Solver - FullTime</p>
+                <p>I am deeply passionate about solving global challenges through impactful technology solutions. With expertise in backend systems and AI/ML, I build scalable software that delivers meaningful outcomes.</p>
+            </div>
+            
+            <div class="terminal">
+                <p><span class="prompt">$ </span><span class="command">cat about_me.json</span></p>
+                <pre>
+    {
+    "name": "Stephen Nwankwo",
+    "role": "Software Engineer",
+    "experience": "5+ years",
+    "location": "Earth 337",
+    "interests": [
+        "backend systems",
+        "AI/ML",
+        "open source",
+        "robotics"
+    ],
+    "current_focus": "Building user-centric backend and AI services"
+    }
+                </pre>
+                <p><span class="prompt">$ </span><span class="cursor"></span></p>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">February 2025 - Present</div>
+                    <div class="timeline-position">Product Engineer</div>
+                    <div class="timeline-company">Venco Africa - Lagos, Nigeria</div>
+                    <div class="timeline-description">
+                        <p>Built an AI Agent to support the customer experience team, boosting their ticket resolving rate by 40%.Optimized database queries to enhance performance and reliability.Improved onboarding of new customer experience staff using developed AI Agent.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Agentic AI</span>
+                        <span class="tech-tag">Frappe</span>
+                        <span class="tech-tag">AI/ML</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">April 2024 - January 2025</div>
+                    <div class="timeline-position">Backend Developer</div>
+                    <div class="timeline-company">Cospire - Remote, Lagos, Nigeria</div>
+                    <div class="timeline-description">
+                        <p>Designed and built an onboarding system for workspaces, increasing client onboarding efficiency by 75%. Developed a secure and scalable payment flow, enhancing customer trust by 60%.Planned and implemented a booking logic, achieving a 30% increase in successful reservations and a 20% reduction in processing time.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">September 2022 - April 2024</div>
+                    <div class="timeline-position">Back-end Engineer (contract)</div>
+                    <div class="timeline-company">Upnyx - Remote, India</div>
+                    <div class="timeline-description">
+                        <p>Engineered AI Agent to provide support in various fields, namely; marketing, research, social media post generation, etc... Provide support to junior developers, improving their efficiency by 60%. Designed a fast and realtime chat system for AI Agent.</p>
+                        <p>Built RESTful services for financial technology applications. Integrated third-party payment gateways and implemented secure authentication systems.</p>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Agentic AI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Car Booking API</h3>
+                    <a href="https://github.com/stenwire/AutoGo">
+                        <p>Developed a high-performance vehicle reservation system with real-time availability tracking, secure payment processing, and driver management features. Built with scalability to handle concurrent bookings.</p>
+                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">Chat Based Order Management API</h3>
+                    <a href="https://github.com/stenwire/chat-based-order-management-API">
+                        <p>Innovative platform that enables businesses to process customer orders directly through chat interfaces. Features natural language processing to interpret order details and seamless integration with inventory systems.</p>
+                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">NextJs</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">FarmPlanna - AI Agent</h3>
+                    <a href="https://github.com/stenwire/farmplanna-ai-agent-for-farming">
+                        <p>An intelligent assistant built with Google's AI Development Kit (ADK) that provides contextual farming guidance for Nigerian agriculture. Helps new farmers with crop selection, planting techniques, and local market insights.</p>
+                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Google ADK</span>
+                        <span class="tech-tag">RAG</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Go</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">FastAPI</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>DevOps</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">AWS</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog">
+            <h2>Articles</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Learn Google ADK: Build a farming agent</h3>
+                    <a href="https://dev.to/sten/learn-google-agent-adk-build-a-farming-agent-pc8">
+                        <p>A comprehensive guide to building AI assistants using Google's Agent Development Kit. This tutorial walks through creating a specialized farming assistant for Nigerian agriculture, with step-by-step instructions on setting up the ADK environment and implementing RAG techniques.</p>
+                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Google ADK</span>
+                        <span class="tech-tag">LLMs</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">Performance Testing: Is Your API Ready for Real-World Traffic?</h3>
+                    <a href="https://dev.to/sten/performance-testing-is-your-api-ready-for-real-world-traffic-4e9p">
+                        <p>An in-depth exploration of API performance testing methodologies. Covers load testing, stress testing, and scalability benchmarking with practical examples using modern testing tools. Includes strategies for identifying bottlenecks and optimization techniques.</p>
+                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">APIs</span>
+                        <span class="tech-tag">Testing</span>
+                        <span class="tech-tag">Performance</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">Understanding Row-level locking in databases</h3>
+                    <a href="https://dev.to/sten/understanding-row-level-locking-in-databases-2c8j">
+                        <p>A technical deep dive into database concurrency control through row-level locking. Explains isolation levels, transaction management, and deadlock prevention with practical examples in PostgreSQL and MySQL. Essential reading for backend developers working with high-concurrency applications.</p>
+                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">Databases</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Concurrency</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Interested in working together? Feel free to reach out through any of these channels:</p>
+            <div class="contact-links">
+                <a href="mailto:nwankwostephen039@yahoo.com" class="contact-link">nwankwostephen039@yahoo.com</a>
+                <a href="https://github.com/stenwire" class="contact-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/stephen-nwankwo-9876b4196/" class="contact-link">LinkedIn</a>
+                <a href="https://dev.to/sten" class="contact-link">Dev.to</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 Stephen Nwankwo — Built with pain, stop the killings!</p>
+    </footer>
+</body>
+</html>
