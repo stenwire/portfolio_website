@@ -1,0 +1,46 @@
+<!-- project-detail.html -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/stenwire/portfolio_website@main/sten_logo.png" type="image/png">
+    <title>Project Details</title>
+    <!-- Link to the main stylesheet and the new detail page stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="project-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- UPDATED FONT IMPORTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    
+    <!-- Include the 'marked' library to parse Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Defer the script to ensure it runs after the page content is loaded -->
+    <script src="project-detail.js" defer></script>
+</head>
+<body>
+    <div class="top-gradient"></div>
+
+    <main class="container">
+        <header class="detail-header">
+            <a href="projects.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Portfolio
+            </a>
+            <div id="project-header-info">
+                <h1 id="project-title">Loading Project...</h1>
+                <p id="project-category" class="card-category"></p>
+            </div>
+        </header>
+
+        <article id="markdown-content" class="markdown-body">
+            <!-- The rendered Markdown content will be injected here -->
+            <div class="loader"></div>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2025 Built by Stephen Nwankwo — <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">checkout my hot leaks</a></p>
+    </footer>
+</body>
+</html>

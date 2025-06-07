@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/stenwire/portfolio_website@main/sten_logo.png" type="image/png">
+    <title>Stephen's Project Portfolio</title>
+    <link rel="stylesheet" href="projects.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- The 'defer' attribute ensures the script runs after the HTML is parsed -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="top-gradient"></div>
+
+    <main class="container">
+      <header class="detail-header">
+            <a href="index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Home
+            </a>
+        </header>
+
+        <header class="portfolio-header">
+            <h1>Stephen's Project Portfolio</h1>
+            <p>Check out my project portfolio documentation below</p>
+            <button class="share-btn" id="share-button">
+                <!-- Share SVG Icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                Share portfolio
+            </button>
+        </header>
+
+        <section id="project-grid" class="project-grid"></section>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2025 Built by Stephen Nwankwo — <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">checkout my hot leaks</a></p>
+    </footer>
+
+    <!-- Floating Navigation Bar -->
+    <nav class="floating-nav">
+      <div class="nav-menu-wrapper">
+            <!-- The new menu, hidden by default -->
+            <div id="nav-menu" class="nav-menu">
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#articles">Articles</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <!-- The button that will open the menu -->
+            <button class="nav-btn" id="nav-menu-btn" aria-label="Open Navigation Menu" aria-haspopup="true" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H4c-1.1 0-2 .9-2 2v6h8V3zm0 18H4c-1.1 0-2-.9-2-2v-6h8v8zm10-18h-6v8h8V5c0-1.1-.9-2-2-2zm-6 18h6c1.1 0 2-.9 2-2v-6h-8v8z"></path></svg>
+            </button>
+        </div>
+        <button class="nav-btn" id="search-btn" aria-label="Search Projects">
+            <!-- Search SVG Icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+        </button>
+        <a href="https://www.linkedin.com/in/stephen-nwankwo-9876b4196/" target="_blank" rel="noopener noreferrer" class="nav-btn tooltip" data-tooltip="Ask me a question about my project">
+            <!-- Question Mark SVG Icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path></svg>
+        </a>
+    </nav>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal-overlay">
+        <div class="search-modal-content">
+            <button id="close-modal-btn" class="close-modal-btn" aria-label="Close search modal">×</button>
+            <h2>Filter Projects</h2>
+            <p>Search by title, category (e.g., Cloud, AI), or tool (e.g., Python, AWS).</p>
+            <input type="text" id="search-input" placeholder="e.g., 'React' or 'Web App'" autocomplete="off">
+            <div id="filter-results-count"></div>
+        </div>
+    </div>
+</body>
+</html>
