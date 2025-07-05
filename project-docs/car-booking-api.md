@@ -1,6 +1,6 @@
 # AutoGO: Car Booking API Documentation 
 
-<img src="../icons8-github-48.png" alt="" align="center">[Link to Project](https://github.com/stenwire/AutoGo)
+<img src="icons8-github-48.png" alt="" align="center">[Link to Project](https://github.com/stenwire/AutoGo)
 
 ## Introduction  
 
