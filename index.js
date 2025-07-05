@@ -12,22 +12,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenuBtn = document.getElementById('nav-menu-btn');
     const navMenu = document.getElementById('nav-menu');
 
-    let allItems = [];
+    let projectItems = [];
+    let articleItems = [];
 
-    // --- Fetch and Render All Items ---
+    // --- Fetch Projects and Articles Separately ---
     const fetchItems = async () => {
         try {
-            const response = await fetch('projects.json');
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            allItems = await response.json();
+            const [projectsResponse, articlesResponse] = await Promise.all([
+                fetch('projects.json'),
+                fetch('articles.json')
+            ]);
+
+            if (!projectsResponse.ok || !articlesResponse.ok) {
+                throw new Error(`Failed to load one or both JSON files.`);
+            }
+
+            projectItems = await projectsResponse.json();
+            articleItems = await articlesResponse.json();
+
             // Initial render
             filterAndRenderItems(); 
         } catch (error) {
             console.error("Could not fetch items:", error);
-            projectGrid.innerHTML = `<p class="no-results-message">Failed to load content.</p>`;
-            articleGrid.innerHTML = '';
+            projectGrid.innerHTML = `<p class="no-results-message">Failed to load projects.</p>`;
+            articleGrid.innerHTML = `<p class="no-results-message">Failed to load articles.</p>`;
         }
     };
+
 
     // --- Generic Renderer for a grid ---
     const renderGrid = (items, gridElement, emptyMessage) => {
@@ -40,22 +51,31 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(item => {
             const itemCard = document.createElement('div');
             itemCard.className = 'project-card';
-            // Use the markdownFile for the detail page link
-            const detailUrl = `project-detail.html?id=${item.id}`;
+
+            // Determine the detail link
+            const isArticle = item.category === 'Article';
+            const detailUrl = isArticle ? item.url : `project-detail.html?id=${item.id}`;
+            const targetAttr = isArticle ? `target="_blank" rel="noopener noreferrer"` : '';
 
             itemCard.innerHTML = `
                 <div class="card-header">
                     <span class="card-category">${item.category}</span>
                     <span class="kebab-menu">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                        </svg>
                     </span>
                 </div>
                 <div class="card-content">
                     <h3>${item.title}</h3>
                 </div>
                 <div class="card-footer">
-                    <a href="${detailUrl}" class="project-link" aria-label="View details for ${item.title}">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <a href="${detailUrl}" class="project-link" aria-label="View details for ${item.title}" ${targetAttr}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
                     </a>
                 </div>
             `;
@@ -63,31 +83,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+
     // --- Filter and Render Logic ---
     const filterAndRenderItems = () => {
         const query = searchInput.value.toLowerCase().trim();
 
-        const filteredItems = allItems.filter(item => {
-            if (!query) return true; // Show all if query is empty
-            const titleMatch = item.title.toLowerCase().includes(query);
-            const categoryMatch = item.category.toLowerCase().includes(query);
-            const toolsMatch = item.tools.some(tool => tool.toLowerCase().includes(query));
-            return titleMatch || categoryMatch || toolsMatch;
-        });
+        const filterItems = (items) => {
+            return items.filter(item => {
+                if (!query) return true;
+                const titleMatch = item.title.toLowerCase().includes(query);
+                const categoryMatch = item.category.toLowerCase().includes(query);
+                const toolsMatch = item.tools?.some(tool => tool.toLowerCase().includes(query));
+                return titleMatch || categoryMatch || toolsMatch;
+            });
+        };
 
-        // Separate filtered items into projects and articles
-        const projects = filteredItems.filter(item => item.category === 'Project');
-        const articles = filteredItems.filter(item => item.category === 'Article');
+        const filteredProjects = filterItems(projectItems);
+        const filteredArticles = filterItems(articleItems);
 
-        renderGrid(projects, projectGrid, "No projects found.");
-        renderGrid(articles, articleGrid, "No articles found.");
-        
-        // Update search result count in modal
+        renderGrid(filteredProjects, projectGrid, "No projects found.");
+        renderGrid(filteredArticles, articleGrid, "No articles found.");
+
+        // Update search result count
         if (searchModal.classList.contains('visible')) {
-            const count = filteredItems.length;
-            filterResultsCount.textContent = `${count} item${count !== 1 ? 's' : ''} found.`;
+            const totalCount = filteredProjects.length + filteredArticles.length;
+            filterResultsCount.textContent = `${totalCount} item${totalCount !== 1 ? 's' : ''} found.`;
         }
     };
+
 
     // --- Navigation Menu Controls ---
     const toggleNavMenu = (event) => {
