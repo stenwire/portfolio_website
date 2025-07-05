@@ -1,6 +1,6 @@
 # **NaijaFarmHand: AI-Powered Farming Assistant for Nigerian Farmers** 🌱🇳🇬  
 
-<img src="../icons8-github-48.png" alt="" align="center">[Link to Project](https://github.com/stenwire/NaijaFarmHand-Agent)
+<img src="icons8-github-48.png" alt="" align="center">[Link to Project](https://github.com/stenwire/NaijaFarmHand-Agent)
 
 <!-- ![Farm Assistant Concept](https://example.com/farm-assistant-image.jpg) *Illustration of NaijaFarmHand assisting Nigerian farmers*   -->
 

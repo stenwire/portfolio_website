@@ -1,6 +1,6 @@
 # **A Real-Time Chat System for Order Management**  
 
-<img src="../icons8-github-48.png" alt="" align="center">[Link to Project](https://github.com/stenwire/chat-based-order-management-API)
+<img src="icons8-github-48.png" alt="" align="center">[Link to Project](https://github.com/stenwire/chat-based-order-management-API)
 
 <p align="center">  
   <a href="" target="blank"><img src="https://pixhive.s3.us-east-2.amazonaws.com/images/live-chat.png" width="120" alt="Chat API Logo" /></a>  
